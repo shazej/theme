@@ -1,0 +1,235 @@
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="content-page-header">
+        <h5>Customer Details Active</h5>
+    </div>
+</div>
+<!-- /Page Header -->
+
+<!-- Table -->
+<div class="row">
+<div class="col-sm-12">
+<div class="card-table"> 
+    <div class="card-body">
+        <div class="table-responsive">
+            
+            <table 
+            matSort
+            (matSortChange)="sortData($event)"
+            class="table table-stripped table-hover datatable">
+                <thead class="thead-light">
+                    <tr>
+                        <th mat-sort-header="invoiceId">
+                            <label class="custom_check">
+                                <input type="checkbox" name="invoice">
+                                <span class="checkmark"></span> 
+                            </label>Invoice ID
+                        </th>
+                        <th mat-sort-header="category">Category</th>
+                        <th mat-sort-header="createdOn">Created On</th>
+                        <th mat-sort-header="invoicePerson">Invoice To</th>
+                        <th mat-sort-header="tOtalAmount">Total Amount</th>												   
+                        <th mat-sort-header="paidAmount">Paid Amount</th>
+                        <th mat-sort-header="paymentMode">Payment Mode</th>
+                        <th mat-sort-header="balanace">Balance</th>
+                        <th mat-sort-header="dueDate">Due Date</th>
+                        <th mat-sort-header="status">Status</th>
+                        <th mat-sort-header="action" class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of recurringinvoice; let i = index">
+                        <td>
+                            <label class="custom_check">
+                                <input type="checkbox" name="invoice">
+                                <span class="checkmark"></span> 
+                            </label>
+                            <a [routerLink]="routes.viewInvoice" class="invoice-link">{{data.invoiceId}}</a>
+                        </td>
+                        <td>{{data.category}}</td>
+                        <td>{{data.createdOn}}</td>
+                        <td>
+                            <h2 class="table-avatar">
+                                <a [routerLink]="routes.profile" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" [src]="data.img" alt="User Image"></a>
+                                <a [routerLink]="routes.profile">{{data.invoicePerson}} <span>{{data.mailId}}</span></a>
+                            </h2>
+                        </td>
+                        <td>{{data.totalAmount}}</td>
+                        <td>{{data.paidAmount}}</td>													
+                        <td>{{data.paymentmode}}</td>
+                        <td>{{data.balance}}</td>
+                        <td>{{data.dueDate}}</td>
+                        <td><span class="badge bg-success-light">{{data.status}}</span></td>
+                        <td>
+                            <div class="dropdown dropdown-action">
+                                <a href="#" class=" btn-action-icon " data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <ul>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" [routerLink]="routes.customerdetailspaid"><i class="far fa-bell me-2"></i>Active</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" [routerLink]="routes.customerdetailscancel"><i class="far fa-bell-slash me-2"></i>In Active</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                                                        
+                </tbody>
+            </table>
+            <div class="table_header">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length">
+                      <label>
+                        Show
+                        <select
+                          [(ngModel)]="pageSize"
+                          (ngModelChange)="PageSize()"
+                          class="form-control form-control-sm"
+                        >
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select>
+                        Entries
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                  <div class="pagination_section">
+                    <ul class="pagination">
+                      <li
+                        class="page-item "
+                        [ngClass]="{
+                          disabled: currentPage === 1
+                        }"
+                      >
+                        <a
+                          (click)="getMoreData('previous')"
+                          class="page-link"
+                          href="javascript:void(0);"
+                          tabindex="-1"
+                          ><i class="fa fa-angle-double-right me-2"></i>Previous</a
+                        >
+                      </li>
+    
+                      <ng-container
+                        *ngFor="let item of pageNumberArray; let i = index"
+                      >
+                        <li
+                          class="page-item"
+                          [class.active]="item === currentPage"
+                          [ngClass]="
+                            (pageNumberArray[currentPage - 2] > item &&
+                              item !== 1 &&
+                              pageNumberArray.length > 6) ||
+                            (pageNumberArray[currentPage] < item &&
+                              item !== 1 &&
+                              pageNumberArray.length > 6 &&
+                              pageNumberArray.length !== item)
+                              ? 'hide-sub-menu'
+                              : 'show-sub-menu'
+                          "
+                        >
+                          <a
+                            (click)="moveToPage(item)"
+                            class="page-link"
+                            href="javascript:void(0);"
+                          >
+                            {{ item }}
+                            <span *ngIf="item === currentPage" class="sr-only"
+                              >(current)</span
+                            >
+                          </a>
+                        </li>
+                        <li
+                          class="page-item"
+                          *ngIf="
+                            i === 0 && pageNumberArray.length > 6 && currentPage > 2
+                          "
+                          [hidden]="currentPage === 1"
+                       
+                        >
+                          <a class="page-link"    (click)="moveToPage(currentPage - 2)" href="javascript:void(0);"> ... </a>
+                        </li>
+                        <li
+                          *ngIf="
+                            i === pageNumberArray.length - 2 &&
+                            pageNumberArray.length > 6
+                          "
+                          [hidden]="
+                            currentPage >=
+                              pageNumberArray[pageNumberArray.length - 2] ||
+                            totalData <
+                              serialNumberArray[serialNumberArray.length - 1]
+                          "
+                          class="page-item"
+                         
+                        >
+                          <a class="page-link"  (click)="moveToPage(currentPage + 2)" href="javascript:void(0);"> ... </a>
+                        </li>
+                      </ng-container>
+    
+                      <li
+                        class="page-item"
+                        [ngClass]="{
+                          disabled:
+                            currentPage ===
+                              pageNumberArray[pageNumberArray.length - 1] ||
+                              recurringinvoice.length === 0
+                        }"
+                      >
+                        <a
+                          (click)="getMoreData('next')"
+                          class="page-link"
+                          href="javascript:void(0);"
+                          >Next<i class="fa fa-angle-double-left ms-2"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<!-- /Table -->
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Delete Customer Details</h3>
+                    <p>Are you sure want to delete?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="#" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Delete</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" data-bs-dismiss="modal" class="btn btn-primary paid-cancel-btn">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Items Modal -->
+
+  

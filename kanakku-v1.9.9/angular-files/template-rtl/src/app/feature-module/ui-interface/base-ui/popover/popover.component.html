@@ -1,0 +1,109 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Popover</h5>
+  </div>	
+</div>
+<!-- /Page Header -->	
+
+<div class="row">
+
+  <!-- Popover -->
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Basic Popover</h5>
+      </div>
+      <div class="card-body card-buttons">
+        <div class="popover-list">
+          <button
+            class="btn btn-primary"
+            type="button"
+            [popover]="content"
+            popoverTitle="Popover title"
+            placement="auto"
+            triggers="click"
+          >
+            Click to toggle popover
+          </button>
+        
+          <a
+            class="example-popover btn btn-primary"
+            tabindex="0"
+            role="button"
+            [popover]="content"
+            popoverTitle="Popover title"
+            placement="auto"
+            triggers="focus"
+            >Dismissible popover</a
+          >
+        
+          <button
+            class="example-popover btn btn-primary"
+            type="button"
+            [popover]="content"
+            placement="bottom"
+            triggers="mouseenter"
+          >
+            On Hover Tooltip
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Popover -->
+
+  <!-- Popover -->
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Direction Popover</h5>
+      </div>
+      <div class="card-body card-buttons">
+        <div class="popover-list">
+          <button
+            class="example-popover btn btn-primary"
+            type="button"
+            [popover]="
+              'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.'
+            "
+            [popoverTitle]="'Popover title'"
+            placement="top"
+          >
+            Popover on top
+          </button>
+          <button
+            class="example-popover btn btn-primary"
+            type="button"
+            [popover]="
+              'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.'
+            "
+            placement="left"
+          >
+            Popover on right
+          </button>
+          <button
+            class="example-popover btn btn-primary"
+            type="button"
+            [popover]="
+              'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.'
+            "
+            placement="bottom"
+          >
+            Popover on bottom
+          </button>
+          <button
+            class="example-popover btn btn-primary"
+            type="button"
+            [popover]="
+              'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.'
+            "
+            placement="right"
+          >
+            Popover on left
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Popover -->

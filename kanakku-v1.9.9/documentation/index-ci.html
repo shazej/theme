@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<title>Kanakku - Codeigniter 4 Mobile Template Documentation</title>
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+		
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+		<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">	
+
+		<!-- Main CSS -->	
+		<link rel="stylesheet" href="assets/css/style.css">
+		
+	</head>
+	<body data-bs-spy="scroll" data-bs-target="#sidebar-menu" data-bs-offset="100">
+		
+		<div class="main-wrapper">
+			<!-- Header -->
+			<header>
+				<nav class="navbar" id="home">
+					<div class="container-fluid">
+						<div class="navbar-left">
+							<a class="navbar-brand" href="index.html">
+								<img class="logo-dark" src="assets/img/dreamguys-logo.png" alt="logo">
+							</a>
+						</div>
+						<div class="action-list">
+							<a class="btn btn-primary btn-live" target="_blank" href="https://themeforest.net/item/kanakku-sales-invoices-codeigniter-admin-template/38006199">Buy Now</a>
+							<a class="btn btn-primary btn-live" target="_blank" href="https://kanakku-ci.dreamguystech.com/index.html">Live Demo <i class="fas fa-arrow-right ps-2"></i></a>
+							<a class="support-btn" target="_blank" href="https://themeforest.net/user/dreamguys"><img class="img-fluid" src="assets/img/headset_mic.png" alt="icon"> Support</a>
+						</div>
+					</div>
+				</nav>
+				
+				<!-- Mobile Menu Toggle -->
+				<a class="mobile_btn" id="mobile_btn">
+					<i class="fas fa-bars"></i>
+				</a>
+				<!-- /Mobile Menu Toggle -->
+				
+			</header>
+			<!-- Header -->
+			
+			<!-- Main Wrapper -->
+		
+			<div class="sidebar" id="sidebar">
+				<div class="sidebar-inner slimscroll">
+					<div id="sidebar-menu" class="sidebar-menu sidebar-body">
+						<h2>Table Of Content</h2>
+						<ul class="nav nav-sidebar">
+							<li class="nav-item">
+								<a class="nav-link" href="#documentation">1. Introduction</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#installation">2. Installation</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#file-structure">3. File Structure</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#customization">4. Customization</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#credits">5. Credits</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#support">7. Support</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#thank-you">8. Thank You</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="page-wrapper" id="documentation">
+				<div class="content container-fluid">
+					<div class="logo">
+						<a class="main-logo" href="index.html">
+							<img class="img-fluid logoimg" src="assets/img/logo.png" alt="logo">
+						</a>
+					</div>
+					<p>Kannaku - Codeigniter 4 Template Documentation</p>
+					<hr>
+					<div class="page-header">
+						<h4>1. Introduction</h4>
+						<ul>
+							<li>Created on: 18 Mar 2022</li>
+							<li>Developed by: <a target="_blank" href="https://dreamguys.co.in/">DreamGuy's Technologies</a>
+							</li>
+							<li>Support via email: <a href="mailto:admin@dreamguys.co.in">business@dreamguys.co.in</a>
+							</li>
+							<li>Support via Themeforest: <a target="_blank" href="https://themeforest.net/user/dreamguys/">Take me there</a></li>
+						</ul>
+						<p>Kanakku is a fully featured premium admin dashboard template built on top of awesome Bootstrap 5.1.3. It's crafted using modern web technologies HTML5, CSS3, jQuery and codeigniter 4.</p>
+						<p>Kanakku - Codeigniter Admin Dashboard Template is easily customizable and developer-friendly codes. It will help your team moving faster and saving development costs and valuable time.</p>
+						<p>If you’re a developer looking for an admin dashboard that is fully responsive with Bootstrap then you are at the right place to start your project using Kanakku - Codeigniter Responsive Bootstrap 5 Admin Dashboard.</p>
+					</div>
+					<hr>
+					
+					<section id="installation">
+						<h5 class="mt-4">Installation</h5>
+	                    <p>
+	                        To setup the admin template, follow the below-mentioned steps:
+	                    </p>
+	                    <h6 class="mt-4">Server Requirements </h6>
+
+	                    <p class="mt-4">
+	                    	<span style="color:red;">Important*</span> This Server is required a PHP version 7.
+	                    </p>
+
+	                    <p class="mt-4">
+	                        After you finished with the above steps, you can run the
+	                        following commands into the terminal/command prompt from the
+	                        root directory of the project to run the project locally or
+	                        build for
+	                        production use:
+	                    </p>
+	                    <div class="table-responsive">
+	                    <table class="table table-bordered ">
+	                        <thead>
+	                            <tr>
+	                                <th style="width: 20%;">
+	                                    <i class="ti-file"></i> Command</th>
+	                                <th>Description</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr>
+	                                <td>
+	                                    <code>composer install</code>
+	                                </td>
+	                                <td>
+	                                    command to install all of the framework's dependencies.
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td colspan="2">
+	                                    <strong>
+	                                        Please fill your DB credentials in the .env file.
+	                                    </strong>
+	                                    <div class="custom-pre">
+	                                        database.default.hostname = localhost<br/>
+	                                        database.default.database = kanakku-ci<br/>
+	                                        database.default.username = root<br/>
+	                                        database.default.password = <br/>
+	                                        database.default.DBDriver = MySQLi
+	                                    </div>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>
+	                                    <code>php spark migrate</code>
+	                                </td>
+	                                <td>
+	                                   This will migrate the database tables. For more details visit <a href="https://codeigniter.com/user_guide/dbmgmt/migration.html?highlight=migrate" target="_blank">https://codeigniter.com/user_guide/dbmgmt/migration.html?highlight=migrate </a>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>
+	                                    <code>php spark serve </code>
+	                                </td>
+	                                <td>
+	                                    The development server is accessible at http://localhost:8080. <br/>
+	                                    To run on other port just run command : php spark serve --port=8081
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                </div>
+	                     <div id="routes" class="mb-5">
+                            <h5 class="mt-4">General Routes</h5>
+                            You can follow the official doc <a href="https://codeigniter.com/user_guide/incoming/routing.html#setting-your-own-routing-rules" target="_blank">https://codeigniter.com/user_guide/incoming/routing.html#setting-your-own-routing-rules</a><br/>
+                            You can add new routes in the file: <code>app/Config/Routes.php</code> <br/>
+                            i.e. <code>$routes->&lt;method>('&lt;redirect-link>', '&lt;controller-name>::&lt;controller-method>');</code>
+                            <p>
+                                
+                            </p>
+                        </div>
+					</section>
+					<hr>
+					<section id="file-structure">
+						<h5 class="mt-0 mb-2">📁 Folder & Files Structure</h5>					
+                        <div class="row files">
+                            <div class="col-md-6">
+                                <p class="text-muted mb-4">
+                                    <strong>Codeigniter</strong>
+                                </p>
+	<pre><i class="fas fa-folder"></i><span>Kannaku-ci/ </span>
+│
+└── <i class="fas fa-folder"></i><span>app/ </span>
+	│
+	└── <i class="fas fa-folder"></i><span> Config </span>          
+	│
+	└── <i class="fas fa-folder"></i><span>Controller  </span>             
+	│
+	└── <i class="fas fa-folder"></i><span>Database </span>       
+	│
+	└── <i class="fas fa-folder"></i><span>Filters   </span>              
+	│
+	└── <i class="fas fa-folder"></i><span>Helpers  </span>              
+	│
+	└── <i class="fas fa-folder"></i><span>plugins</span>
+	│
+	└── <i class="fas fa-folder"></i><span>Language</span>
+	│
+	└── <i class="fas fa-folder"></i><span>Libraries</span>
+	│
+	└── <i class="fas fa-folder"></i><span>Models</span>
+	│
+	└── <i class="fas fa-folder"></i><span>ThirdParty</span> 
+	│
+	└── <i class="fas fa-folder"></i><span>Validation</span> 
+	│
+	└── <i class="fas fa-folder"></i><span>Views</span> 
+	│
+	└──  <i class="fas fa-file text-blue"></i><span>.htaccess</span> 
+	│
+	└──  <i class="fas fa-file text-blue"></i><span>Common.php</span> 
+	│
+	└──  <i class="fas fa-file text-blue"></i><span>index.html</span> 	   
+│
+└── <i class="fas fa-folder"></i><span>public/ </span>
+	│
+	└──  <i class="fas fa-file text-blue"></i><span>assets/</span>
+		│
+		└──  <i class="fas fa-folder"></i><span>css</span>
+	        │
+	        └── <i class="fas fa-folder"></i><span>fonts </span>
+	        │
+	        └── <i class="fas fa-folder"></i><span>img </span>
+	        │
+	        └── <i class="fas fa-folder"></i><span>js </span>
+	        │
+	        └── <i class="fas fa-folder"></i><span>plugins </span>
+	        │
+	        └── <i class="fas fa-file text-blue"></i><span>.htaccess </span>
+	        │
+	        └── <i class="fas fa-file text-blue"></i><span>index.php </span>
+│
+└── <i class="fas fa-folder"></i><span>system </span>
+│
+└── <i class="fas fa-folder"></i><span>vendor </span>
+│
+└── <i class="fas fa-folder"></i><span>writable </span>
+│
+└── <i class="fas fa-file text-blue"></i> <span>.gitignore</span>
+│
+└── <i class="fas fa-file text-blue"></i> <span>composer.json</span>
+│
+└── <i class="fas fa-file text-blue"></i> <span>composer.lock</span>
+│
+└── <i class="fas fa-file text-blue"></i> <span>env</span>
+│
+└── <i class="fas fa-file text-blue"></i> <span>license.txt</span>
+│
+└── <i class="fas fa-file text-blue"></i> <span>phpunit.xml.dist</span>
+│
+└── <i class="fas fa-file text-blue"></i> <span>spark</span>
+
+	
+</pre>
+
+                            </div>
+                        </div>
+					</section>
+					<hr>
+				
+					<section id="customization">
+						<h4>Customization</h4>
+						<p>1. We can easily add a single line common meta's.this variable can be declared in a controller.</p>
+						<div class="structure-wrap">
+<pre><code>
+$data = [
+	'title_meta' => view('partials/title-meta', ['title' => 'Dashboard']),
+	'page_title' => view('partials/page-title', ['title' => 'Dashboard', 'li_1' => 'Kanakku', 'li_2' => 'Dashboard'])
+];
+
+&lt;?= $title_meta ?&gt;
+
+
+</code></pre>
+						</div>
+						<p>2. While the add() method is simple to use, it is often handier to work with multiple routes at once, using the map() method. Instead of calling the add() method for each route that you need to add, you can define an array of routes and then pass it as the first parameter to the map() method:		</p>
+						<div class="structure-wrap">
+<pre><code>
+$multipleRoutes = [
+    'product/(:num)'      => 'Catalog::productLookupById',
+    'product/(:alphanum)' => 'Catalog::productLookupByName',
+];
+
+$routes->map($multipleRoutes);
+</code></pre>
+						</div>
+						<p>3. How to include body,headd-css and sidebar in a pages</p>
+						<div class="structure-wrap">
+<pre><code>
+&lt;?= $this->include('partials/head-css') ?&gt;
+&lt;?= $this->include('partials/body') ?&gt;
+&lt;?= $this->include('partials/sidebar') ?&gt;
+
+</code></pre>
+						</div>
+					</section>	
+					<hr>
+					<section id="credits">
+						<h4>Credits</h4>
+						<p>We've used the following resources as listed. These are some awesome creation and we are thankful to the community.</p>
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>Plugin</th>
+										<th>Link</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Jquery</td>
+										<td><a href="https://jquery.com/" target="_blank">https://jquery.com/</a>
+										</td>
+									</tr>
+									<tr>
+										<td>Font Awesome</td>
+										<td><a href="https://fontawesome.com/" target="_blank">https://fontawesome.com/</a>
+										</td>
+									</tr>
+									<tr>
+										<td>Codeigniter 4</td>
+										<td><a href="https://codeigniter4.github.io/userguide/index.html" target="_blank">https://codeigniter4.github.io/userguide/index.html</a></td>
+									</tr>
+									<tr>
+										<td>Bootstrap</td>
+										<td><a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/" target="_blank">https://getbootstrap.com/docs/5.0/getting-started/introduction/</a></td>
+									</tr>
+									<tr>
+										<td>Bootstrap-Tagsinput</td>
+										<td><a href="https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/" target="_blank">https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/</a></td>
+									</tr>
+									<tr>
+										<td>Morris</td>
+										<td><a href="https://morrisjs.github.io/morris.js/" target="_blank">https://morrisjs.github.io/morris.js/</a></td>
+									</tr>
+									<tr>
+										<td>Raphael</td>
+										<td><a href="http://raphaeljs.com/" target="_blank">http://raphaeljs.com/</a></td>
+									</tr>
+									<tr>
+										<td>Sticky-Kit-Master</td>
+										<td><a href="https://leafo.net/sticky-kit/" target="_blank">https://leafo.net/sticky-kit/</a></td>
+									</tr>
+									<tr>
+										<td>Summernote</td>
+										<td><a href="https://summernote.org/plugins" target="_blank">https://summernote.org/plugins</a></td>
+									</tr>
+									<tr>
+										<td>Chart</td>
+										<td><a href="https://www.chartjs.org/" target="_blank">https://www.chartjs.org/</a></td>
+									</tr>
+									<tr>
+										<td>Full Calendar</td>
+										<td><a href="https://fullcalendar.io/" target="_blank">https://fullcalendar.io/</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+					<hr>
+
+					<section id="support">
+						<h4>Support</h4>
+						<p class="mb-0">If you have any queries please contact us through email: <strong>business@dreamguys.co.in</strong>
+						</p>
+					</section>
+					<hr>
+
+					<section id="thank-you" class="mb-0">
+						<h4>Thank You</h4>
+						<p>Thank you so much for using this template</p>
+						<a target="_blank" href="https://themeforest.net/user/dreamguys"><strong>Dreamguy's Technologies Pvt Ltd,</strong></a>
+					</section>
+				</div>
+			</div>
+		
+			<!-- Footer -->
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-sm-12">
+							<p class="mb-0">© 2023 Kanakku. All rights reserved.</p>
+						</div>
+						<a href="#" class="top-move"><i class="fas fa-arrow-up"></i></a>
+					</div>
+				</div>
+			</footer>
+			<!-- /footer -->
+				
+		</div>
+		<!-- /Main Wrapper -->
+		
+		<!-- jQuery -->
+		<script src="assets/js/jquery-3.6.0.min.js"></script>
+
+		<!-- Bootstrap Core JS -->
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		
+		<!-- Slimscroll JS -->
+		<script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+		
+		<!-- Custom JS -->
+		<script src="assets/js/script.js"></script>
+	
+	</body>
+</html>

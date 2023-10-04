@@ -1,0 +1,584 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Vendors</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a
+            (click)="open()"
+            matTooltip="Filter"
+            href="javascript:void(0);"
+            class="btn btn-filters w-auto popup-toggle"
+          >
+            <span class="me-2"
+              ><img src="assets/img/icons/filter-icon.svg" alt="filter" /></span
+            >Filter
+          </a>
+        </li>
+        <li>
+          <a class="btn-filters" matTooltip="Grid-View" href="javascript:void(0);"
+            ><span><i class="feather icon-grid"></i></span>
+          </a>
+        </li>
+        <li>
+          <a class="active btn-filters" matTooltip="List-View" href="javascript:void(0);"
+            ><span><i class="feather icon-list"></i></span>
+          </a>
+        </li>
+        <li class="">
+          <div class="dropdown dropdown-action">
+            <a
+              href="#"
+              class="btn-filters"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              matTooltip="download"
+              ><span><i class="feather icon-download"></i></span
+            ></a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <ul class="d-block">
+                <li>
+                  <a
+                    class="d-flex align-items-center download-item"
+                    href="javascript:void(0);"
+                    download
+                    ><i class="far fa-file-pdf me-2"></i>PDF</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="d-flex align-items-center download-item"
+                    href="javascript:void(0);"
+                    download
+                    ><i class="far fa-file-text me-2"></i>CVS</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a class="btn-filters"  matTooltip="print" href="javascript:void(0);"
+            ><span><i class="feather icon-printer"></i></span>
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-import" href="javascript:void(0);"
+            ><span
+              ><i class="feather icon-check-square me-2"></i> Import</span
+            ></a
+          >
+        </li>
+        <li>
+          <a
+            class="btn btn-primary"
+            href="javascript:void(0);"
+            data-bs-toggle="modal"
+            data-bs-target="#add_vendor"
+            ><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Add
+            Vendors</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<!-- Search Filter -->
+<div id="filter_inputs" class="card filter-card">
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Name</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Email</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Phone</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Search Filter -->
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card-table">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table
+            matSort
+            (matSortChange)="sortData($event)"
+            class="table table-center table-hover datatable"
+          >
+            <thead class="thead-light">
+              <tr>
+                <th mat-sort-header="sNo">#</th>
+                <th mat-sort-header="name">Name</th>
+                <th mat-sort-header="phone">Phone</th>
+                <th mat-sort-header="created">Created</th>
+                <th mat-sort-header="balance">Balance</th>
+                <th mat-sort-header="action">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of datas; let i = index">
+                <td>{{ data.sNo }}</td>
+                <td>
+                  <h2 class="table-avatar">
+                    <a
+                      [routerLink]="routes.profile"
+                      class="avatar avatar-sm me-2"
+                      ><img
+                        class="avatar-img rounded-circle"
+                        [src]="data.img"
+                        alt="User Image"
+                    /></a>
+                    <a [routerLink]="routes.profile"
+                      >{{ data.name }} <span>{{ data.email }}</span></a
+                    >
+                  </h2>
+                </td>
+                <td>{{ data.phone }}</td>
+                <td>{{ data.created }}</td>
+                <td>{{ data.balance }}</td>
+                <td class="d-flex align-items-center">
+                  <a [routerLink]="routes.ledger" class="btn btn-greys me-2"
+                    ><i class="fa fa-eye me-1"></i> Ledger</a
+                  >
+                  <div class="dropdown dropdown-action">
+                    <a
+                      href="#"
+                      class="btn-action-icon"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      ><i class="fas fa-ellipsis-v"></i
+                    ></a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                      <ul>
+                        <li>
+                          <a
+                            class="dropdown-item"
+                            href="javascript:void(0);"
+                            data-bs-toggle="modal"
+                            data-bs-target="#edit_vendor"
+                            ><i class="far fa-edit me-2"></i>Edit</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            class="dropdown-item"
+                            href="javascript:void(0);"
+                            data-bs-toggle="modal"
+                            data-bs-target="#delete_modal"
+                            ><i class="far fa-trash-alt me-2"></i>Delete</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="table_header">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <div class="dataTables_length">
+                  <label>
+                    Show
+                    <select
+                      [(ngModel)]="pageSize"
+                      (ngModelChange)="PageSize()"
+                      class="form-control form-control-sm"
+                    >
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>
+                    Entries
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-3">
+              <div class="pagination_section">
+                <ul class="pagination">
+                  <li
+                    class="page-item"
+                    [ngClass]="{
+                      disabled: currentPage === 1
+                    }"
+                  >
+                    <a
+                      (click)="getMoreData('previous')"
+                      class="page-link"
+                      href="javascript:void(0);"
+                      tabindex="-1"
+                      ><i class="fa fa-angle-double-left me-2"></i>Previous</a
+                    >
+                  </li>
+
+                  <ng-container
+                    *ngFor="let item of pageNumberArray; let i = index"
+                  >
+                    <li
+                      class="page-item"
+                      [class.active]="item === currentPage"
+                      [ngClass]="
+                        (pageNumberArray[currentPage - 2] > item &&
+                          item !== 1 &&
+                          pageNumberArray.length > 6) ||
+                        (pageNumberArray[currentPage] < item &&
+                          item !== 1 &&
+                          pageNumberArray.length > 6 &&
+                          pageNumberArray.length !== item)
+                          ? 'hide-sub-menu'
+                          : 'show-sub-menu'
+                      "
+                    >
+                      <a
+                        (click)="moveToPage(item)"
+                        class="page-link"
+                        href="javascript:void(0);"
+                      >
+                        {{ item }}
+                        <span *ngIf="item === currentPage" class="visually-hidden"
+                          >(current)</span
+                        >
+                      </a>
+                    </li>
+                    <li
+                      class="page-item"
+                      *ngIf="
+                        i === 0 && pageNumberArray.length > 6 && currentPage > 2
+                      "
+                      [hidden]="currentPage === 1"
+                    >
+                      <a
+                        (click)="moveToPage(currentPage - 2)"
+                        tabindex="0"
+                        class="page-link"
+                        href="javascript:void(0);"
+                      >
+                        ...
+                      </a>
+                    </li>
+                    <li
+                      *ngIf="
+                        i === pageNumberArray.length - 2 &&
+                        pageNumberArray.length > 6
+                      "
+                      [hidden]="
+                        currentPage >=
+                          pageNumberArray[pageNumberArray.length - 2] ||
+                        totalData <
+                          serialNumberArray[serialNumberArray.length - 1]
+                      "
+                      class="page-item"
+                    >
+                      <a
+                        (click)="moveToPage(currentPage + 2)"
+                        tabindex="0"
+                        class="page-link"
+                        href="javascript:void(0);"
+                      >
+                        ...
+                      </a>
+                    </li>
+                  </ng-container>
+
+                  <li
+                    class="page-item"
+                    [ngClass]="{
+                      disabled:
+                        currentPage ===
+                          pageNumberArray[pageNumberArray.length - 1] ||
+                        datas.length === 0
+                    }"
+                  >
+                    <a
+                      (click)="getMoreData('next')"
+                      class="page-link"
+                      href="javascript:void(0);"
+                      >Next<i class="fa fa-angle-double-right ms-2"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Asset -->
+<div [ngClass]="{ 'open-filter': Toggledata === true }" class="toggle-sidebar">
+  <div class="sidebar-layout-filter">
+    <div class="sidebar-header">
+      <h5>Filter</h5>
+      <a (click)="open()" href="javascript:void(0);" class="sidebar-closes"
+        ><i class="fa-regular fa-circle-xmark"></i
+      ></a>
+    </div>
+    <div class="sidebar-body">
+      <form action="#" autocomplete="off">
+        <!-- Customer -->
+        <div class="accordion" id="accordionMain1">
+          <div class="card-header-new" id="headingOne">
+            <h6 class="filter-title">
+              <a
+                href="javascript:void(0);"
+                class="w-100"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                Vendors
+                <span class="float-end"
+                  ><i class="fa-solid fa-chevron-down"></i
+                ></span>
+              </a>
+            </h6>
+          </div>
+
+          <div
+            id="collapseOne"
+            class="collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample1"
+          >
+            <div class="card-body-chat">
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="checkBoxes1">
+                    <div class="form-custom">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="member_search1"
+                        placeholder="Search here"
+                      />
+                      <span
+                        ><img src="assets/img/icons/search.svg" alt="img"
+                      /></span>
+                    </div>
+                    <div class="selectBox-cont">
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> Brian Johnson
+                      </label>
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> Russell Copeland
+                      </label>
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> Greg Lynch
+                      </label>
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> John Blair
+                      </label>
+                      <!-- View All -->
+                      <div class="view-content">
+                        <div
+                          class="viewall-One"
+                          *ngFor="let user of users"
+                          [ngClass]="{
+                            closed: !isCollapsed,
+                            open: isCollapsed
+                          }"
+                        >
+                          <label htmlFor="label" class="custom_check w-100">
+                            <input
+                              id="label"
+                              type="checkbox"
+                              name="username"
+                              [(ngModel)]="user.checked"
+                            />
+                            <span class="checkmark"></span> {{ user.name }}
+                          </label>
+                        </div>
+                        <div class="view-all">
+                          <a
+                            href="javascript:void(0);"
+                            class="viewall-button-One"
+                            (click)="toggleCollapse()"
+                            ><span class="me-2">{{
+                              isCollapsed ? "Close" : "View All"
+                            }}</span
+                            ><span
+                              ><i class="fa fa-circle-chevron-down"></i></span
+                          ></a>
+                        </div>
+                      </div>
+                      <!-- /View All -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Customer -->
+
+        <div class="filter-buttons">
+          <button
+            type="submit"
+            class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary"
+          >
+            Apply
+          </button>
+          <button
+            type="submit"
+            class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary"
+          >
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--/Add Asset -->
+
+<!-- Add Vendor Modal -->
+<div class="modal custom-modal fade" id="add_vendor" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Add Vendor</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label>Name</label>
+              <input type="text" class="form-control" placeholder="Enter Name">
+            </div>
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label>Email</label>
+              <input type="text" class="form-control" placeholder="Enter Email Address">
+            </div>
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label>Phone Number</label>
+              <input type="number" class="form-control" placeholder="Enter Phone Number">
+            </div>
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-0">
+              <label>Closing Balance</label>
+              <input type="number" class="form-control" placeholder="Enter Closing Balance Amount">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+        <a href="#" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Add Vendor</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Vendor Modal -->
+
+<!-- Edit Vendor Modal -->
+<div class="modal custom-modal fade" id="edit_vendor" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Edit Vendor</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <div class="input-block mb-3">
+              <label>Name</label>
+              <input type="text" class="form-control" value="John Smith" placeholder="Enter Name">
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12">
+            <div class="input-block mb-3">
+              <label>Email</label>
+              <input type="text" class="form-control" value="john@example.com" placeholder="Select Date">
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12">
+            <div class="input-block mb-3">
+              <label>Phone Number</label>
+              <input type="text" class="form-control" value="+1 989-438-3131" placeholder="Enter Reference Number">
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12">
+            <div class="input-block mb-0">
+              <label>Balance</label>
+              <input type="text" class="form-control" value="$4200" placeholder="Enter Reference Number">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+        <a href="#" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Update</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Edit Vendor Modal -->
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Vendor</h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <button type="reset" data-bs-dismiss="modal" class="w-100 btn btn-primary paid-continue-btn">Delete</button>
+            </div>
+            <div class="col-6">
+              <button type="submit" data-bs-dismiss="modal" class="w-100 btn btn-primary paid-cancel-btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Items Modal -->
+

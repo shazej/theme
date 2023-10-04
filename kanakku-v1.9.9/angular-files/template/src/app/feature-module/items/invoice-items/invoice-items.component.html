@@ -1,0 +1,372 @@
+<div class="card invoices-tabs-card">
+  <div class="card-body card-body pt-0 pb-0">
+    <div class="invoices-items-main-tabs">
+      <div class="row align-items-center">
+        <div class="col-lg-12 col-md-12">
+          <div class="invoices-items-tabs">
+            <ul>
+              <li>
+                <a [routerLink]="routes.invoiceItemList" class="active"
+                  >All Items</a
+                >
+              </li>
+              <li><a [routerLink]="routes.invoiceItemCategory">Category</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card invoices-tabs-card">
+  <div class="card-body card-body pt-0 pb-0">
+    <div class="invoices-main-tabs border-0 pb-0">
+      <div class="row align-items-center">
+        <div class="col-lg-12 col-md-12">
+          <div class="invoices-settings-btn invoices-settings-btn-one">
+            <a
+              href="javascript:void(0);"
+              class="btn"
+              data-bs-toggle="modal"
+              data-bs-target="#add_items"
+            >
+              <i class="feather icon-plus-circle"></i> Add New Item
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card card-table">
+      <div class="card-body">
+        <div>
+          <div class="table_header">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <div class="dataTables_length">
+                  <label>
+                    Show
+                    <select
+                      [(ngModel)]="pageSize"
+                      (ngModelChange)="PageSize()"
+                      class="form-control form-control-sm"
+                    >
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>
+                    Entries
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <div class="dataTables_filter">
+                  <label>
+                    Search:
+                    <input
+                      [(ngModel)]="searchDataValue"
+                      (ngModelChange)="searchData(searchDataValue)"
+                      class="form-control form-control-sm"
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-scroll">
+            <table
+              matSort
+              (matSortChange)="sortData($event)"
+              class="table table-stripped table-hover"
+            >
+              <thead class="thead-light">
+                <tr>
+                  <th mat-sort-header="item">Name</th>
+                  <th mat-sort-header="price">Pricing</th>
+                  <th mat-sort-header="discount">Discount (%)</th>
+                  <th mat-sort-header="description">Description</th>
+                  <th mat-sort-header="date">Date Added</th>
+                  <th class="text-end">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of tableData; let i = index">
+                  <tr>
+                    <td>
+                      <label class="custom_check">
+                        <input type="checkbox" name="invoice" />
+                        <span class="checkmark"></span>
+                      </label>
+                      <a href="javascript:void(0);" class="items-links">{{
+                        item.item
+                      }}</a>
+                    </td>
+                    <td class="text-primary">{{ item.price }}</td>
+                    <td>{{ item.discount }}</td>
+                    <td class="items-text">
+                      {{ item.description }}
+                    </td>
+                    <td>
+                      {{ item.date }}
+                    </td>
+                    <td class="text-end">
+                      <a
+                        [routerLink]="routes.editInvoice"
+                        class="btn btn-sm btn-white text-success me-2"
+                        ><i class="far fa-edit me-1"></i> Edit</a
+                      >
+                      <a
+                        class="btn btn-sm btn-white text-danger"
+                        href="javascript:void(0);"
+                        data-bs-toggle="modal"
+                        data-bs-target="#delete_paid"
+                        ><i class="far fa-trash-alt me-1"></i>Delete</a
+                      >
+                    </td>
+                  </tr>
+                </ng-container>
+                <tr *ngIf="tableData.length === 0">
+                  <td colspan="6">
+                    <h5 style="text-align: center">No data found</h5>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table_footer">
+            <div class="col-sm-12 col-md-5">
+              <div class="dataTables_info">
+                Showing {{ serialNumberArray[0] }} to
+                {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                {{ totalData }} entries
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-7">
+              <div class="pagination_section">
+                <ul class="pagination">
+                  <li
+                    class="page-item"
+                    [ngClass]="{
+                      disabled: currentPage === 1
+                    }"
+                  >
+                    <a
+                      (click)="getMoreData('previous')"
+                      class="page-link"
+                      href="javascript:void(0);"
+                      tabindex="-1"
+                      >Previous</a
+                    >
+                  </li>
+
+                  <ng-container
+                    *ngFor="let item of pageNumberArray; let i = index"
+                  >
+                    <li
+                      class="page-item"
+                      [class.active]="item === currentPage"
+                      [ngClass]="
+                        (pageNumberArray[currentPage - 2] > item &&
+                          item !== 1 &&
+                          pageNumberArray.length > 6) ||
+                        (pageNumberArray[currentPage] < item &&
+                          item !==1 &&
+                          pageNumberArray.length > 6 &&
+                          pageNumberArray.length !== item)
+                          ? 'hide-sub-menu'
+                          : 'show-sub-menu'
+                      "
+                    >
+                      <a
+                        (click)="moveToPage(item)"
+                        class="page-link"
+                        href="javascript:void(0);"
+                      >
+                        {{ item }}
+                        <span *ngIf="item === currentPage" class="visually-hidden"
+                          >(current)</span
+                        >
+                      </a>
+                    </li>
+                    <li
+                      class="page-item"
+                      *ngIf="
+                        i === 0 && pageNumberArray.length > 6 && currentPage > 2
+                      "
+                      [hidden]="currentPage === 1"
+                      
+                    >
+                      <a class="page-link" (click)="moveToPage(currentPage - 2)" href="javascript:void(0);"> ... </a>
+                    </li>
+                    <li
+                      *ngIf="
+                        i === pageNumberArray.length - 2 &&
+                        pageNumberArray.length > 6
+                      "
+                      [hidden]="
+                        currentPage >=
+                          pageNumberArray[pageNumberArray.length - 2] ||
+                        totalData <
+                          serialNumberArray[serialNumberArray.length - 1]
+                      "
+                      class="page-item"
+                      
+                    >
+                      <a class="page-link" (click)="moveToPage(currentPage + 2)" href="javascript:void(0);"> ... </a>
+                    </li>
+                  </ng-container>
+
+                  <li
+                    class="page-item"
+                    [ngClass]="{
+                      disabled:
+                        currentPage ===
+                          pageNumberArray[pageNumberArray.length - 1] ||
+                        tableData.length === 0
+                    }"
+                  >
+                    <a
+                      (click)="getMoreData('next')"
+                      class="page-link"
+                      href="javascript:void(0);"
+                      >Next
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Invoices Items Modal -->
+<div class="modal custom-modal fade bank-details" id="add_items" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="form-header text-start mb-0">
+          <h4 class="mb-0">Create New Item</h4>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="bank-inner-details">
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group">
+                <label htmlFor="label">Item Name</label>
+                <input id="label"
+                  type="text"
+                  class="form-control"
+                  placeholder="Add New Item"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group">
+                <label htmlFor="label">Category</label>
+                <select class="form-select form-control">
+                  <option>Select category</option>
+                  <option>GoMechanic Neutron 600</option>
+                  <option>Car Wash Shampoo 250ml</option>
+                  <option>Bosch 1300W High Pressure...</option>
+                  <option>Clear Coat Spray -Quick Dr...9</option>
+                  <option>Aquatak High Pressure Wash.</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group">
+                <label htmlFor="label">Price Per unit</label>
+                <input  id="label" type="text" class="form-control" placeholder="$" />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group">
+                <label htmlFor="label">Discount</label>
+                <input id="label" type="text" class="form-control" placeholder="%" />
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="form-group">
+                <label htmlFor="label">Description (Optional) </label>
+                <textarea
+                  class="form-control"
+                  placeholder="Add item description"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="bank-details-btn">
+          <a
+            href="javascript:void(0);"
+            data-bs-dismiss="modal"
+            class="btn bank-cancel-btn me-2"
+            >Cancel</a
+          >
+          <a href="javascript:void(0);" class="btn bank-save-btn">Save Item</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Items Modal -->
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_paid" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Invoice Iems</h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a
+                href="javascript:void(0);"
+                class="btn btn-primary paid-continue-btn"
+                >Delete</a
+              >
+            </div>
+            <div class="col-6">
+              <a
+                href="javascript:void(0);"
+                data-bs-dismiss="modal"
+                class="btn btn-primary paid-cancel-btn"
+                >Cancel</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Items Modal -->
